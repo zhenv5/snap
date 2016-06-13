@@ -74,10 +74,13 @@ void parallel_bsf(PNGraph G,int n){
 	for (PNGraph::TObj::TNodeI NI = G->BegNI(); NI < G->EndNI(); NI++) {
 	//PGraph::TObj::TNodeI NI = G->BegNI();
 		int node_id = NI.GetId();
+    if (node_id > 50000){
+      break;
+    }
 		nodes_id.push_back(node_id);
 	}
 	long number_of_nodes_in_graph = nodes_id.size();
-	//printf("%ld nodes in Graph",number_of_nodes_in_graph);
+	printf("%ld nodes in Graph \n",number_of_nodes_in_graph);
 
 	#pragma omp parallel num_threads(num_threads)
 	{
@@ -130,7 +133,7 @@ int main(int argc, char* argv[]) {
    This means there is one edge per line and node IDs are assumed to be integers.
   **/
 
-   if(argc != 2){
+   if(argc != 3){
       printf("need more parameters...\n");
       return 0;
 
